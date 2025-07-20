@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Registered Users & Bookings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f6f6;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #333;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📋 Registered Users</h2>
+  <div id="userTableContainer">
+    <p>Loading users...</p>
+  </div>
+
+  <h2>📅 Table Bookings</h2>
+  <div id="bookingTableContainer">
+    <p>Loading bookings...</p>
+  </div>
+
+  <button onclick="window.location.href='index.html'" class="back-button">Back to Main Site</button>
+
+  <script>
+    function loadUsers() {
+      const container = document.getElementById('userTableContainer');
+      const users = [];
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('user_')) {
+          const user = JSON.parse(localStorage.getItem(key));
+          users.push(user);
+        }
+      }
+
+      if (users.length === 0) {
+        container.innerHTML = "<p>No registered users found.</p>";
+        return;
+      }
+
+      let tableHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Registered On</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${users.map((u, i) => `
+              <tr>
+                <td>${i + 1}</td>
+                <td>${u.name}</td>
+                <td>${u.email}</td>
+                <td>${u.phone}</td>
+                <td>${u.address}</td>
+                <td>${new Date(u.regDate).toLocaleDateString()}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+
+      container.innerHTML = tableHTML;
+    }
+
+    function loadBookings() {
+      const container = document.getElementById('bookingTableContainer');
+      const bookings = [];
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('booking_')) {
+          const booking = JSON.parse(localStorage.getItem(key));
+          bookings.push(booking);
+        }
+      }
+
+      if (bookings.length === 0) {
+        container.innerHTML = "<p>No bookings found.</p>";
+        return;
+      }
+
+      let tableHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Guests</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${bookings.map((b, i) => `
+              <tr>
+                <td>${i + 1}</td>
+                <td>${b.name}</td>
+                <td>${b.email}</td>
+                <td>${b.phone}</td>
+                <td>${b.date}</td>
+                <td>${b.time}</td>
+                <td>${b.guests}</td>
+                <td>${b.message || ''}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+
+      container.innerHTML = tableHTML;
+    }
+
+    window.onload = function () {
+      loadUsers();
+      loadBookings();
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book a Table - FoodieFinds</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #bookingSuccess {
+      color: green;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🍽️ Book Your Table</h2>
+
+  <form id="bookingForm">
+    <input type="text" id="bname" placeholder="Your Name" required />
+    <input type="email" id="bemail" placeholder="Your Email" required />
+    <input type="tel" id="bphone" placeholder="Phone Number" required />
+    <input type="date" id="bdate" required />
+    <input type="time" id="btime" required />
+    <input type="number" id="bguests" placeholder="No. of Guests" required min="1" />
+    <textarea id="bmessage" placeholder="Message (optional)"></textarea>
+    <button type="submit">Book Table</button>
+  </form>
+
+  <p id="bookingSuccess">✅ Booking successful!</p>
+
+  <script src="booking.js"></script>
+</body>
+</html>
