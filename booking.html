@@ -4,62 +4,88 @@
   <meta charset="UTF-8" />
   <title>Book a Table - FoodieFinds</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('images/bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .booking-container {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 500px;
     }
 
     h2 {
       text-align: center;
+      color: #333;
+      margin-bottom: 20px;
     }
 
-    form {
-      max-width: 500px;
-      margin: auto;
-      background: #f9f9f9;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    }
-
-    input, textarea {
+    form input,
+    form textarea {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
     }
 
     button {
-      padding: 10px 20px;
+      width: 100%;
+      padding: 12px;
       background-color: #28a745;
       color: white;
       border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
     }
 
     #bookingSuccess {
       color: green;
       text-align: center;
+      margin-top: 15px;
       display: none;
     }
   </style>
 </head>
 <body>
 
-  <h2>🍽️ Book Your Table</h2>
+  <div class="booking-container">
+    <h2>🍽️ Book Your Table</h2>
 
-  <form id="bookingForm">
-    <input type="text" id="bname" placeholder="Your Name" required />
-    <input type="email" id="bemail" placeholder="Your Email" required />
-    <input type="tel" id="bphone" placeholder="Phone Number" required />
-    <input type="date" id="bdate" required />
-    <input type="time" id="btime" required />
-    <input type="number" id="bguests" placeholder="No. of Guests" required min="1" />
-    <textarea id="bmessage" placeholder="Message (optional)"></textarea>
-    <button type="submit">Book Table</button>
-  </form>
+    <form id="bookingForm">
+      <input type="text" id="bname" placeholder="Your Name" required />
+      <input type="email" id="bemail" placeholder="Your Email" required />
+      <input type="tel" id="bphone" placeholder="Phone Number" required />
+      <input type="date" id="bdate" required />
+      <input type="time" id="btime" required />
+      <input type="number" id="bguests" placeholder="No. of Guests" required min="1" />
+      <textarea id="bmessage" placeholder="Message (optional)"></textarea>
+      <button type="submit">Book Table</button>
+    </form>
 
-  <p id="bookingSuccess">✅ Booking successful!</p>
+    <p id="bookingSuccess">✅ Booking successful!</p>
+  </div>
 
   <script src="booking.js"></script>
 </body>
