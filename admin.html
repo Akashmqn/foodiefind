@@ -2,25 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin - Registered Users & Bookings</title>
+  <title>Admin Dashboard - FoodieFinds</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f6f6f6;
-      padding: 20px;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('images/bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .admin-container {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 1200px;
+      overflow-y: auto;
+      max-height: 90vh;
     }
 
     h2 {
       text-align: center;
       color: #333;
+      margin-bottom: 30px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       margin-top: 20px;
+      background: white;
     }
 
     th, td {
@@ -30,7 +46,7 @@
     }
 
     th {
-      background-color: #333;
+      background-color: #e91e63;
       color: white;
     }
 
@@ -38,32 +54,51 @@
       background-color: #f9f9f9;
     }
 
+    .section {
+      margin-bottom: 60px;
+    }
+
     .back-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #007bff;
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 25px;
+      background-color: #e91e63;
       color: white;
       border: none;
       cursor: pointer;
-      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #c2185b;
     }
   </style>
 </head>
 <body>
 
-  <h2>📋 Registered Users</h2>
-  <div id="userTableContainer">
-    <p>Loading users...</p>
-  </div>
+  <div class="admin-container">
+    <h2>👨‍💼 Admin Dashboard</h2>
 
-  <h2>📅 Table Bookings</h2>
-  <div id="bookingTableContainer">
-    <p>Loading bookings...</p>
-  </div>
+    <!-- Registered Users Section -->
+    <div class="section" id="userTableContainer">
+      <h2>📋 Registered Users</h2>
+      <p>Loading registered users...</p>
+    </div>
 
-  <button onclick="window.location.href='index.html'" class="back-button">Back to Main Site</button>
+    <!-- Table Bookings Section -->
+    <div class="section" id="bookingTableContainer">
+      <h2>📅 Table Bookings</h2>
+      <p>Loading table bookings...</p>
+    </div>
+
+    <button onclick="window.location.href='index.html'" class="back-button">← Back to Main Site</button>
+  </div>
 
   <script>
+    // Load Registered Users
     function loadUsers() {
       const container = document.getElementById('userTableContainer');
       const users = [];
@@ -77,11 +112,11 @@
       }
 
       if (users.length === 0) {
-        container.innerHTML = "<p>No registered users found.</p>";
+        container.innerHTML += "<p>No registered users found.</p>";
         return;
       }
 
-      let tableHTML = `
+      let userTable = `
         <table>
           <thead>
             <tr>
@@ -108,9 +143,10 @@
         </table>
       `;
 
-      container.innerHTML = tableHTML;
+      container.innerHTML = "<h2>📋 Registered Users</h2>" + userTable;
     }
 
+    // Load Table Bookings
     function loadBookings() {
       const container = document.getElementById('bookingTableContainer');
       const bookings = [];
@@ -124,11 +160,11 @@
       }
 
       if (bookings.length === 0) {
-        container.innerHTML = "<p>No bookings found.</p>";
+        container.innerHTML += "<p>No table bookings found.</p>";
         return;
       }
 
-      let tableHTML = `
+      let bookingTable = `
         <table>
           <thead>
             <tr>
@@ -152,17 +188,17 @@
                 <td>${b.date}</td>
                 <td>${b.time}</td>
                 <td>${b.guests}</td>
-                <td>${b.message || ''}</td>
+                <td>${b.message || '-'}</td>
               </tr>
             `).join('')}
           </tbody>
         </table>
       `;
 
-      container.innerHTML = tableHTML;
+      container.innerHTML = "<h2>📅 Table Bookings</h2>" + bookingTable;
     }
 
-    window.onload = function () {
+    window.onload = () => {
       loadUsers();
       loadBookings();
     };
